@@ -1,0 +1,78 @@
+import pygame
+import sys
+
+
+pygame.init()
+
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Happy Birthday Moving Text")
+
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+
+
+font_size = 72
+font_size2 = 1
+font = pygame.font.Font(None, font_size)
+font1 = pygame.font.Font(None, font_size2)
+
+
+text = "Happy Birthday Moving"
+text2 = "Mohammad Mehdi (MARDANI)"
+text_surface = font.render(text, True, RED)
+text_surface2 = font1.render(text2, True, "black")
+text_rect2 = text_surface2.get_rect()
+text_rect2.center = (410,300)
+text_rect = text_surface.get_rect()
+text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+
+x_pos = text_rect.centerx
+y_pos = text_rect.centery
+x_velocity = 0
+y_velocity = 0
+
+running = True
+while running:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+
+    if font_size < 250:
+        font_size += 3
+    else:
+        font_size += 15
+    if font_size2 < 25 and font_size > 400:
+        font_size2 += .1
+    font = pygame.font.Font(None, int(font_size))
+    text_surface = font.render(text, True, RED)
+
+    font2 = pygame.font.Font(None,int(font_size2))
+    text_surface2 = font2.render(text2,True,"black")
+
+
+    screen.fill(WHITE)
+
+
+    screen.blit(text_surface, text_rect)
+
+    screen.blit(text_surface2,text_rect2)
+
+
+    pygame.display.flip()
+
+
+    pygame.time.Clock().tick(60)
+
+
+pygame.quit()
+sys.exit()
+
+
